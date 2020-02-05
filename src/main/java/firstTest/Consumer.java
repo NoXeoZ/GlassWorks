@@ -1,3 +1,5 @@
+package firstTest;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -16,7 +18,7 @@ public class Consumer {
         Properties props=new Properties();
 
         props.put("bootstrap.servers","localhost:9092");
-        props.put("group.id","Consumer");
+        props.put("group.id","firstTest.Consumer");
         props.put("key.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
 
@@ -33,7 +35,7 @@ public class Consumer {
             noRecordsCount+=consumerRecords.count();
 
             consumerRecords.forEach(record -> {
-                System.out.printf("Consumer Record:(%s, %s, %d, %d)\n",
+                System.out.printf("firstTest.Consumer Record:(%s, %s, %d, %d)\n",
                         record.key(), record.value(),
                         record.partition(), record.offset());
             });
