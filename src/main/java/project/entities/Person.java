@@ -11,4 +11,12 @@ public class Person{
         this.state=state;
         this.birthDate=birthDate;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }
