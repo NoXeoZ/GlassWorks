@@ -30,6 +30,8 @@ public class AvroProducer {
 
         KafkaProducer<String, byte[]> producer=new KafkaProducer<String,byte[]>(props);
         Schema schema = SchemaAvro.getSchema();
+        GenericRecord record = new GenericData.Record(schema);
+        Injection<GenericRecord, byte[]> recordInjection = GenericAvroCodecs.toBinary(schema);
 
         DataBaseAnalyzer.ScanData();
 
@@ -45,15 +47,12 @@ public class AvroProducer {
 
                 Sell s=new Sell(customer, drug, pharmacy);
 
-                GenericRecord record = new GenericData.Record(schema);
-
                 record.put("nom",s.getNom());
                 record.put("prenom",s.getPrenom());
                 record.put("cip",s.getCip());
                 record.put("prix",s.getPrix());
                 record.put("idPharm",s.getIdPharm());
 
-                Injection<GenericRecord, byte[]> recordInjection = GenericAvroCodecs.toBinary(schema);
                 byte[] bytes=recordInjection.apply(record);
 
                 ProducerRecord<String,byte[]> sellRecord = new ProducerRecord<String, byte[]>("test", bytes);

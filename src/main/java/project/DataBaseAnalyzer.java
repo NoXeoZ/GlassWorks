@@ -42,8 +42,8 @@ public class DataBaseAnalyzer {
 
                 while ( rs.next() ) {
                     int cip = rs.getInt("cip");
-                    double prix=rs.getFloat("prix");
-                    prix+=(new Random().nextDouble()*0.2-0.1)*prix*100;
+                    double prix=rs.getDouble("prix");
+                    prix=(new Random().nextDouble()*0.2-0.1)*prix+prix;
                     drugs.add(new Drug(cip,prix));
                 }
                 rs.close();
