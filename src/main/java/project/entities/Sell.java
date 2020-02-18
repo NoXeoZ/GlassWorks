@@ -1,5 +1,7 @@
 package project.entities;
 
+import java.util.Random;
+
 public class Sell {
     private String nom;
     private String prenom;
@@ -11,8 +13,16 @@ public class Sell {
         this.nom = p.getLastName();
         this.prenom=p.getFirstName();
         this.cip = g.getCip();
-        this.prix=g.getPrix();
+        this.prix=(new Random().nextDouble()*0.2-0.1)*g.getPrix()+g.getPrix();
         this.idPharm=ph.getId();
+    }
+
+    public Sell(String nom, String prenom, int cip, double prix, int idPharm) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.cip = cip;
+        this.prix = prix;
+        this.idPharm = idPharm;
     }
 
     public String getNom() {
