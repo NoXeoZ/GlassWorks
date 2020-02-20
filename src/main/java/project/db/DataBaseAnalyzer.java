@@ -1,15 +1,13 @@
-package project;
+package project.db;
 
 import project.entities.Drug;
 import project.entities.Pharm;
 import project.entities.Sell;
 
-import java.math.RoundingMode;
 import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

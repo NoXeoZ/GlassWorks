@@ -1,4 +1,4 @@
-package project;
+package project.simpleTransaction;
 
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;

@@ -1,4 +1,4 @@
-package project;
+package project.avroTransaction.simple;
 
 import com.twitter.bijection.Injection;
 import com.twitter.bijection.avro.GenericAvroCodecs;
@@ -6,8 +6,7 @@ import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import project.schema.SchemaAvro;
-import scala.util.Try;
+import project.avroTransaction.schema.SchemaAvro;
 
 import java.time.Duration;
 import java.util.Collections;

@@ -1,33 +1,19 @@
-package project;
+package project.avroTransaction.anon;
 
 import com.twitter.bijection.Injection;
 import com.twitter.bijection.avro.GenericAvroCodecs;
+import project.db.DataBaseAnalyzer;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
-import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
-import org.apache.kafka.streams.kstream.KTable;
-import project.entities.Drug;
 import project.entities.Sell;
-import project.schema.SchemaAvro;
+import project.avroTransaction.schema.SchemaAvro;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 public class AvroTopologyConsumer {
     public static void main(String [] args) {
