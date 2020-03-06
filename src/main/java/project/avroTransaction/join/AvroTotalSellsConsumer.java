@@ -12,14 +12,13 @@ import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
 import project.avroTransaction.schema.SchemaAvro;
-import project.avroTransaction.simple.TopicCreator;
+import project.avroTransaction.topics.TopicCreator;
 import project.entities.Sell;
 import project.entities.Sells;
 
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 
-public class TotalSells {
+public class AvroTotalSellsConsumer {
 
     public static void main(String [] args) {
         Schema schema = SchemaAvro.getSchema();
@@ -34,7 +33,7 @@ public class TotalSells {
         props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG,Serdes.ByteArray().getClass());
 
         StreamsBuilder builder = new StreamsBuilder();
-        KStream<String, byte[]> sourceProcessor = builder.stream("test");
+        KStream<String, byte[]> sourceProcessor = builder.stream("testmulti");
 
 
         Properties props1=new Properties();
@@ -79,6 +78,7 @@ public class TotalSells {
                 System.out.println(s.getIdPharm());
                 //Sells.getTotal().entrySet().forEach(u->{if(u.getKey()==s.getCip())System.out.println(Integer.toString(u.getKey())+": "+u.getValue());});
                 System.out.println("Total Price: "+Sells.getTotal().stream().mapToDouble(u->u.getPrix()).sum());
+                System.out.println("Total Size Retrieved "+Sells.getTotal().size());
             }catch(Exception e){
                 System.out.println("problem occured");
                 e.printStackTrace();

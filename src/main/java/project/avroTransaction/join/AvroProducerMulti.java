@@ -1,20 +1,21 @@
-package project.avroTransaction.simple;
+package project.avroTransaction.join;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.twitter.bijection.Injection;
 import com.twitter.bijection.avro.GenericAvroCodecs;
-import project.db.DataBaseAnalyzer;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import project.entities.*;
 import project.avroTransaction.schema.SchemaAvro;
+import project.avroTransaction.topics.TopicCreator;
+import project.db.DataBaseAnalyzer;
+import project.entities.*;
 
 import java.util.Properties;
 
-public class AvroProducer {
+public class AvroProducerMulti {
 
     public static void main(String [] args) {
         Properties props=new Properties();
@@ -23,6 +24,8 @@ public class AvroProducer {
         props.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer","org.apache.kafka.common.serialization.ByteArraySerializer");
 
+        TopicCreator.createTopicMulti();
+
         KafkaProducer<String, byte[]> producer=new KafkaProducer<String,byte[]>(props);
         Schema schema = SchemaAvro.getSchema();
         GenericRecord record = new GenericData.Record(schema);
@@ -30,10 +33,10 @@ public class AvroProducer {
 
         DataBaseAnalyzer.ScanData();
 
-        for(int i=0;i<100;i++){
+        for(int i=0;i<200;i++){
             try {
 
-                Person customer= FakePeople.generate();
+                Person customer=FakePeople.generate();
                 Drug drug= DataBaseAnalyzer.getRandomDrug();
                 Pharm pharmacy= DataBaseAnalyzer.getRandomPharm();
 
@@ -50,7 +53,7 @@ public class AvroProducer {
 
                 byte[] bytes=recordInjection.apply(record);
 
-                ProducerRecord<String,byte[]> sellRecord = new ProducerRecord<String, byte[]>("test", bytes);
+                ProducerRecord<String,byte[]> sellRecord = new ProducerRecord<String, byte[]>("testmulti", bytes);
                 producer.send(sellRecord);
                 System.out.println(i);
             }catch (JsonProcessingException e){

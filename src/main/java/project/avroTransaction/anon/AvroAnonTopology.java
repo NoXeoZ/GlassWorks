@@ -12,7 +12,7 @@ import org.apache.kafka.streams.KafkaStreams;
 import org.apache.kafka.streams.StreamsBuilder;
 import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.kstream.KStream;
-import project.avroTransaction.simple.TopicCreator;
+import project.avroTransaction.topics.TopicCreator;
 import project.entities.Sell;
 import project.avroTransaction.schema.SchemaAvro;
 
