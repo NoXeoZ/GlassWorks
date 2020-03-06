@@ -10,7 +10,15 @@ public class Drug{
     public int getCip(){
         return cip;
     }
-    public double getPrix(){
-        return prix;
+    public double getPrix(){return prix;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Drug) {
+            if (((Drug) o).cip == this.cip) {
+                return true;
+            }
+        }
+        return false;
     }
 }
