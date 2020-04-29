@@ -19,4 +19,20 @@ public class SchemaAvro {
                 .endRecord();
         return avroHttpRequest;
     }
+
+    public static Schema getPharmSchema(){
+        org.apache.avro.Schema avroHttpRequest = SchemaBuilder.record("AvroPharm")
+                .namespace("com.baeldung.avro")
+                .fields().requiredInt("id").requiredString("nom").requiredString("address").requiredString("depart").requiredString("region")
+                .endRecord();
+        return avroHttpRequest;
+    }
+
+    public static Schema getMergedSchema(){
+        org.apache.avro.Schema avroHttpRequest = SchemaBuilder.record("AvroAnonSell")
+                .namespace("com.baeldung.avro")
+                .fields().requiredInt("cip").requiredDouble("prix").requiredInt("idPharm").requiredString("pharmRegion")
+                .endRecord();
+        return avroHttpRequest;
+    }
 }
